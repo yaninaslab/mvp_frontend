@@ -3,9 +3,9 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
 export default {
-  name: "Home",
+  name: "item-card",
 };
 </script>
+
+<style scoped></style>

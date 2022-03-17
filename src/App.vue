@@ -1,12 +1,24 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <page-header></page-header>
+    <item-catalog></item-catalog>
+    <router-view />
   </div>
 </template>
+
+<script>
+import PageHeader from "@/components/PageHeader.vue";
+import ItemCatalog from "@/components/ItemCatalog.vue";
+import Cart from "@/components/Cart.vue";
+export default {
+  name: "app",
+  components: {
+    PageHeader,
+    ItemCatalog,
+    Cart,
+  },
+};
+</script>
 
 <style>
 #app {
