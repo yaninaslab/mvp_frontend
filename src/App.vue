@@ -1,20 +1,18 @@
 <template>
   <div id="app">
     <page-header></page-header>
-    <item-catalog></item-catalog>
+    <cart></cart>
     <router-view />
   </div>
 </template>
 
 <script>
 import PageHeader from "@/components/PageHeader.vue";
-import ItemCatalog from "@/components/ItemCatalog.vue";
 import Cart from "@/components/Cart.vue";
 export default {
   name: "app",
   components: {
     PageHeader,
-    ItemCatalog,
     Cart,
   },
 };
@@ -28,16 +26,13 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 #nav {
   padding: 30px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
 }

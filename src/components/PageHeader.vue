@@ -1,5 +1,66 @@
 <template>
-  <div>
+  <div class="mx-auto overflow-hidden">
+    <v-system-bar></v-system-bar>
+
+    <v-app-bar>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-spacer>
+        <div class="nav_menu">
+          <router-link class="links" to="/">Home</router-link>
+          <router-link class="links" to="/deals">Deals</router-link>
+          <router-link class="links" to="/newarrivals"
+            >New Arrivals</router-link
+          >
+          <router-link class="links" to="/login">Login</router-link>
+        </div>
+      </v-spacer>
+
+      <img class="logo" src="../assets/logo_mvp.png" alt="" />
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-list nav dense>
+        <v-list-item-group
+          v-model="group"
+          active-class="deep-purple--text text--accent-4"
+        >
+          <v-list-item>
+            <v-list-item-title
+              ><router-link class="mobile_links" to="/"
+                >Home</router-link
+              ></v-list-item-title
+            >
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title
+              ><router-link class="mobile_links" to="/deals"
+                >Deals</router-link
+              ></v-list-item-title
+            >
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title
+              ><router-link class="mobile_links" to="/newarrivals"
+                >New Arrivals</router-link
+              ></v-list-item-title
+            >
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title
+              ><router-link class="mobile_links" to="/login"
+                >Login</router-link
+              ></v-list-item-title
+            >
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+  </div>
+  <!-- <div>
     <div class="mobile_header">
       <img class="logo_mobile" src="../assets/logo_mvp.png" alt="" />
       <div @click="showMobileMenu" class="hamburger">
@@ -41,61 +102,37 @@
       </div>
       <img class="logo" src="../assets/logo_mvp.png" alt="" />
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 export default {
   name: "page-header",
-  methods: {
-    showMobileMenu() {
-      this.classList.toggle("menu-drop");
+  methods: {},
+  data: () => ({
+    drawer: false,
+    group: null,
+  }),
+
+  watch: {
+    group() {
+      this.drawer = false;
     },
-  },
-  data() {
-    return {
-      isMobile: false,
-    };
   },
 };
 </script>
 
 <style scoped>
-.mobile_header {
-  max-width: 100%;
-  display: grid;
-  align-items: center;
-  grid-auto-flow: column;
-  min-height: 120px;
-}
-.mobile_header > .logo_mobile {
-  justify-self: start;
-  margin-left: 20px;
-  width: 80px;
+.logo {
+  max-width: 250px;
+  height: 50px;
 }
 .nav_menu {
-  display: flex;
-  justify-content: start;
+  display: grid;
+  justify-self: end;
   grid-auto-flow: column;
-  /* margin-left: 20px; */
-}
-.bar {
-  width: 25px;
-  height: 3px;
-  background-color: #2c3e50;
-  margin: 5px auto;
-  transition: all 0.3s ease-in-out;
-  display: block;
-}
-.hamburger {
-  display: block;
-  justify-self: center;
-  cursor: pointer;
-}
-.logo {
-  margin-top: 10px;
-  max-width: 250px;
-  /* margin-left: 100px; */
+  padding-right: 10px;
+  column-gap: 10px;
 }
 .links {
   font-size: 1.5rem;
@@ -108,46 +145,9 @@ export default {
   font-stretch: expanded;
   text-decoration: none;
 }
-.menu_drop {
-  display: none;
-  position: absolute;
-  width: 100%;
-  top: 70px;
-  background-color: lightgrey;
-  color: white;
-  z-index: 99;
-}
-.hamburger:hover + .menu_drop {
-  display: grid;
-  place-content: center;
-  row-gap: 10px;
-  margin-top: 5%;
-  z-index: 99;
-}
-@media only screen and (min-width: 300px) {
+@media only screen and (max-width: 768px) {
   .nav_menu {
     display: none;
-  }
-  .bar {
-    display: grid;
-  }
-}
-@media only screen and (min-width: 668px) {
-  .bar {
-    display: none;
-  }
-  .mobile_header {
-    display: none;
-  }
-  .nav_menu {
-    width: 90%;
-    min-height: 5vh;
-    display: grid;
-    place-items: center;
-    grid-auto-flow: column;
-  }
-  .nav_menu.active {
-    left: 0;
   }
 }
 </style>

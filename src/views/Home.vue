@@ -1,11 +1,23 @@
 <template>
-  <div></div>
+  <div>
+    <item-catalog></item-catalog>
+  </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import ItemCatalog from "@/components/ItemCatalog.vue";
 export default {
   name: "Home",
+  components: {
+    ItemCatalog,
+  },
+  methods: {
+    get_items() {
+      this.$store.dispatch("get_items");
+    },
+  },
+  mounted() {
+    this.get_items();
+  },
 };
 </script>
