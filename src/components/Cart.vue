@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div v-if="cart_data.length">
     <h1>Cart</h1>
     <cart-item
       v-for="(cart_item, index) in cart_data"
-      :key="cart_item[0]"
+      :key="`${cart_item[0]}_${cart_item[4]}`"
       :cart_item_data="cart_item"
       @removeFromCart="removeFromCart(index)"
     ></cart-item>
@@ -18,14 +18,19 @@ export default {
   components: {
     CartItem,
   },
-  props: {
-    cart_data: {
-      type: Array,
-      default() {
-        return [];
-      },
+  computed: {
+    cart_data() {
+      return this.$store.state.cart;
     },
   },
+  // props: {
+  //   cart_data: {
+  //     type: Array,
+  //     default() {
+  //       return [];
+  //     },
+  //   },
+  // },
   methods: {
     ...mapActions(["remove_item"]),
     removeFromCart(index) {

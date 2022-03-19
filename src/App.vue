@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <page-header></page-header>
-    <cart v-if="cart.length" :cart_data="cart"></cart>
+    <cart></cart>
     <router-view />
   </div>
 </template>
@@ -16,9 +16,9 @@ export default {
     PageHeader,
     Cart,
   },
-  computed: {
-    ...mapGetters(["cart"]),
-  },
+  // computed: {
+  //   ...mapGetters(["cart"]),
+  // },
 };
 </script>
 

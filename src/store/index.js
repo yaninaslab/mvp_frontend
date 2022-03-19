@@ -16,16 +16,21 @@ export default new Vuex.Store({
     set_cart(state, item) {
       if (state.cart.length) {
         let sameItem = false;
-        state.cart.map(function (cart_item) {
-          if (cart_item[0] === item[0]) {
+        for (let i = 0; i < state.cart.length; i++) {
+          if (state.cart[i][0] === item[0]) {
+            state.cart[i][4]++;
+            let duplicateItem = state.cart.splice(i, 1);
+            state.cart = state.cart.concat(duplicateItem);
             sameItem = true;
-            cart_item[4]++;
+            break;
           }
-        });
+        }
         if (!sameItem) {
+          item[4] = 1;
           state.cart.push(item);
         }
       } else {
+        item[4] = 1;
         state.cart.push(item);
       }
     },

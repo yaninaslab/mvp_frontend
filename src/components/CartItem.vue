@@ -35,9 +35,9 @@ export default {
       this.$emit("removeFromCart");
     },
   },
-  mounted() {
-    this.$set(this.cart_item_data, [4], 1);
-  },
+  //   mounted() {
+  //     this.$set(this.cart_item_data, [4], 1);
+  //   },
 };
 </script>
 
