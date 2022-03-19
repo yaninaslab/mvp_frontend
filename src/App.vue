@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <page-header></page-header>
-    <cart></cart>
+    <cart v-if="cart.length" :cart_data="cart"></cart>
     <router-view />
   </div>
 </template>
@@ -9,11 +9,15 @@
 <script>
 import PageHeader from "@/components/PageHeader.vue";
 import Cart from "@/components/Cart.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "app",
   components: {
     PageHeader,
     Cart,
+  },
+  computed: {
+    ...mapGetters(["cart"]),
   },
 };
 </script>
