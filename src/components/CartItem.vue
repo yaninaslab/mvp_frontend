@@ -9,7 +9,11 @@
       <p>{{ cart_item_data[1] }}</p>
       <div class="cart-item_quantity">
         <p>QTY:</p>
-        {{ cart_item_data[4] }}
+        <span>
+          <button class="quantity_btn" @click="decreaseItem">-</button>
+          {{ cart_item_data[4] }}
+          <button class="quantity_btn" @click="increaseItem">+</button>
+        </span>
       </div>
       <div class="cart-item_price">
         <p>C${{ cart_item_data[2] }}</p>
@@ -35,6 +39,12 @@ export default {
   methods: {
     removeFromCart() {
       this.$emit("removeFromCart");
+    },
+    decreaseItem() {
+      this.$emit("decreaseItem");
+    },
+    increaseItem() {
+      this.$emit("increaseItem");
     },
   },
   //   mounted() {
@@ -71,5 +81,15 @@ export default {
   font-weight: 600;
   height: 30px;
   border: black solid;
+}
+.quantity_btn {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 900;
+  width: 40px;
+  margin: 10px;
+  border-radius: 5px;
 }
 </style>

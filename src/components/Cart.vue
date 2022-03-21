@@ -15,10 +15,12 @@
       :key="`${cart_item[0]}_${cart_item[4]}`"
       :cart_item_data="cart_item"
       @removeFromCart="removeFromCart(index)"
+      @decreaseItem="decreaseItem(index)"
+      @increaseItem="increaseItem(index)"
     ></cart-item>
     <div class="cart_total">
-      <p class="total_num">TOTAL (C$)</p>
-      <p>{{ cartTotal }}</p>
+      <p class="total_num">TOTAL:</p>
+      <p>C$ {{ cartTotal }}</p>
     </div>
   </div>
 </template>
@@ -37,17 +39,27 @@ export default {
     },
     cartTotal() {
       let result = [];
-      for (let cart_item of this.cart_data) {
-        result.push(cart_item[2] * cart_item[4]);
+      if (this.cart_data.length) {
+        for (let cart_item of this.cart_data) {
+          result.push(cart_item[2] * cart_item[4]);
+        }
+        result = result.reduce((sum, el) => sum + el, 0);
+        return result;
+      } else {
+        return 0;
       }
-      result = result.reduce((sum, el) => sum + el, 0);
-      return result;
     },
   },
   methods: {
-    ...mapActions(["remove_item"]),
+    ...mapActions(["remove_item", "decrease_item", "increase_item"]),
     removeFromCart(index) {
       this.remove_item(index);
+    },
+    decreaseItem(index) {
+      this.decrease_item(index);
+    },
+    increaseItem(index) {
+      this.increase_item(index);
     },
     backHome() {
       this.$router.push({ path: "/" });

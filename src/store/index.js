@@ -37,6 +37,14 @@ export default new Vuex.Store({
     remove_from_cart(state, index) {
       state.cart.splice(index, 1);
     },
+    increase_item(state, index) {
+      state.cart[index][4]++;
+    },
+    decrease_item(state, index) {
+      if (state.cart[index][4] > 1) {
+        state.cart[index][4]--;
+      }
+    },
   },
   actions: {
     get_items(store) {
@@ -56,6 +64,12 @@ export default new Vuex.Store({
     },
     remove_item({ commit }, index) {
       commit("remove_from_cart", index);
+    },
+    decrease_item({ commit }, index) {
+      commit("decrease_item", index);
+    },
+    increase_item({ commit }, index) {
+      commit("increase_item", index);
     },
   },
   getters: {
