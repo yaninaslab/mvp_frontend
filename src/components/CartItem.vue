@@ -11,7 +11,9 @@
         <p>QTY:</p>
         {{ cart_item_data[4] }}
       </div>
-      <p>{{ cart_item_data[2] }}</p>
+      <div class="cart-item_price">
+        <p>C${{ cart_item_data[2] }}</p>
+      </div>
       <div class="remove_btn">
         <button @click="removeFromCart">Remove</button>
       </div>
@@ -44,13 +46,16 @@ export default {
 <style scoped>
 .cart_item_info {
   display: grid;
+  place-content: center;
   grid-auto-flow: column;
+  margin: 20px;
   place-items: center;
   /* display: flex;
   flex-wrap: nowrap; */
   justify-content: space-between;
   align-items: center;
   padding: 0px 200px;
+  box-shadow: 0 0 8px 0 #e0e0e0;
 }
 .item_image {
   max-width: 100px;
