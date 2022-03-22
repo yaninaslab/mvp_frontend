@@ -1,5 +1,5 @@
 <template>
-  <div class="login_form">
+  <div class="login_form_mobile">
     <h2>Sign in to Coach Insider</h2>
     <input
       class="login"
@@ -60,14 +60,19 @@ export default {
 </script>
 
 <style scoped>
+.login_form_mobile {
+  max-width: 100%;
+}
 input {
-  width: 400px;
+  max-width: 100%;
+  width: 300px;
   margin: 5px;
   border: 1px solid gray;
 }
 .buttons {
   margin: 10px;
-  width: 400px;
+  width: 300px;
+  max-width: 100%;
   border-radius: 5px;
   background-color: black;
   color: white;
@@ -76,7 +81,8 @@ input {
   border: black solid;
 }
 .login {
-  max-width: 500px;
+  max-width: 400px;
+  max-width: 100%;
   border-radius: 5px;
   background: white;
   border: 1px solid gray;

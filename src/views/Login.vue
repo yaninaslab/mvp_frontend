@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>{{ success_message }}</h3>
     <div class="row no-gutters">
       <div class="col-md-6 no-gutters">
         <div class="leftside d-flex justify-content-center align-items-center">
@@ -25,6 +26,11 @@ export default {
     RegisterForm,
     LoginForm,
   },
+  data() {
+    return {
+      success_message: undefined,
+    };
+  },
 };
 </script>
 
@@ -34,7 +40,7 @@ export default {
   height: 100vh;
   width: 100%;
 }
-@media screen and (min-width: 320px) {
+@media screen and (min-width: 768px) {
   .leftside,
   .rightside {
     height: 100vh;

@@ -12,7 +12,9 @@
           <router-link class="links" to="/newarrivals"
             >New Arrivals</router-link
           >
-          <router-link class="links" to="/login">Login</router-link>
+          <router-link v-if="!isAuth" class="links" to="/login"
+            >Login</router-link
+          >
         </div>
       </v-spacer>
 
@@ -51,7 +53,7 @@
 
           <v-list-item>
             <v-list-item-title
-              ><router-link class="mobile_links" to="/login"
+              ><router-link v-if="!isAuth" class="mobile_links" to="/login"
                 >Login</router-link
               ></v-list-item-title
             >
@@ -74,6 +76,12 @@ export default {
   watch: {
     group() {
       this.drawer = false;
+    },
+  },
+  computed: {
+    isAuth() {
+      // return !!this.$store.state.user.loginToken
+      return this.$store.state.user.loginToken ? true : false;
     },
   },
 };

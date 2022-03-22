@@ -1,5 +1,5 @@
 <template>
-  <div class="register_form">
+  <div class="register_form_mobile">
     <h2>Become a Coach Insider</h2>
     <p>
       Join now for early access, birthday gifts,
@@ -84,14 +84,19 @@ export default {
 </script>
 
 <style scoped>
+.register_form_mobile {
+  max-width: 100%;
+}
 input {
-  width: 400px;
+  max-width: 100%;
+  width: 300px;
   margin: 5px;
   border: 1px solid gray;
 }
 .buttons {
   margin: 10px;
-  width: 400px;
+  width: 300px;
+  max-width: 100%;
   border-radius: 5px;
   background-color: black;
   color: white;
@@ -100,7 +105,8 @@ input {
   border: black solid;
 }
 .register {
-  max-width: 500px;
+  max-width: 400px;
+  max-width: 100%;
   border-radius: 5px;
   background: white;
   border: 1px solid gray;

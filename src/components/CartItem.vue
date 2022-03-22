@@ -66,11 +66,10 @@ export default {
   grid-auto-flow: column;
   margin: 20px;
   place-items: center;
-  /* display: flex;
-  flex-wrap: nowrap; */
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 200px;
   box-shadow: 0 0 8px 0 #e0e0e0;
 }
 .item_image {

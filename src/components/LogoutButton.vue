@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button class="link_to_logout" @click="log_out">LOGOUT</button>
+    <button v-if="isAuth" class="link_to_logout" @click="log_out">
+      LOGOUT
+    </button>
   </div>
 </template>
 
@@ -32,6 +34,12 @@ export default {
     return {
       login_token: cookies.get("login_token"),
     };
+  },
+  computed: {
+    isAuth() {
+      // return !!this.$store.state.user.loginToken
+      return this.$store.state.user.loginToken ? true : false;
+    },
   },
 };
 </script>

@@ -4,10 +4,10 @@
       <button class="link_to_home">BACK HOME</button>
     </router-link>
     <div v-if="cart_data.length">
-      <h1>Shopping Bag</h1>
+      <h2 class="mobile_view">Shopping Bag</h2>
     </div>
     <div class="empty_cart" v-if="!cart_data.length">
-      <h2>Your Shopping Bag is empty</h2>
+      <h2 class="mobile_view">Your Shopping Bag is empty</h2>
       <button @click="backHome" class="link_home">SEE WHAT'S NEW</button>
     </div>
     <cart-item
@@ -19,8 +19,11 @@
       @increaseItem="increaseItem(index)"
     ></cart-item>
     <div class="checkout">
-      <button class="order_btn" v-if="cart_data.length">PLACE ORDER</button>
+      <button @click="placeOrder" class="order_btn" v-if="cart_data.length">
+        PLACE ORDER
+      </button>
     </div>
+    <!-- <thank-you></thank-you> -->
     <div class="cart_total">
       <p class="total_num">TOTAL:</p>
       <p>C$ {{ cartTotal }}</p>
@@ -29,12 +32,16 @@
 </template>
 
 <script>
+import axios from "axios";
+import cookies from "vue-cookies";
+// import ThankYou from "@/components/ThankYou.vue";
 import CartItem from "@/components/CartItem.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "cart",
   components: {
     CartItem,
+    // ThankYou,
   },
   computed: {
     cart_data() {
@@ -53,6 +60,12 @@ export default {
       }
     },
   },
+  data() {
+    return {
+      new_order: [],
+      login_token: cookies.get("login_token"),
+    };
+  },
   methods: {
     ...mapActions(["remove_item", "decrease_item", "increase_item"]),
     removeFromCart(index) {
@@ -67,11 +80,31 @@ export default {
     backHome() {
       this.$router.push({ path: "/" });
     },
+    placeOrder() {
+      axios
+        .request({
+          url: "http://127.0.0.1:5000/api/purchase",
+          method: "POST",
+          data: {
+            loginToken: this.login_token,
+          },
+        })
+        .then((response) => {
+          this.new_order = response.data;
+          this.$router.push({ path: "/thanks" });
+        })
+        .catch((error) => {
+          error.message;
+        });
+    },
   },
 };
 </script>
 
 <style scoped>
+h2 {
+  margin-top: 30px;
+}
 .link_to_home {
   position: absolute;
   top: 100px;
@@ -109,7 +142,7 @@ export default {
 }
 .cart_total {
   position: fixed;
-  bottom: 0;
+  bottom: 100px;
   right: 0;
   left: 0;
   padding: 20px;
@@ -123,5 +156,13 @@ export default {
 }
 .total_num {
   margin-right: 30px;
+}
+@media screen and (max-width: 320px) {
+  .mobile_view {
+    display: none;
+  }
+  .link_to_home {
+    display: none;
+  }
 }
 </style>

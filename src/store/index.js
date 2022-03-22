@@ -10,10 +10,14 @@ export default new Vuex.Store({
     items: [],
     cart: [],
     user: {},
+    bags: [],
   },
   mutations: {
     list_items(state, payload) {
       state.items = payload;
+    },
+    list_bags(state, payload) {
+      state.bags = payload;
     },
     set_cart(state, item) {
       if (state.cart.length) {
@@ -70,6 +74,18 @@ export default new Vuex.Store({
           error;
         });
     },
+    get_bags(store) {
+      axios
+        .request({
+          url: "http://127.0.0.1:5000/api/bags",
+        })
+        .then((response) => {
+          store.commit("list_bags", response.data);
+        })
+        .catch((error) => {
+          error;
+        });
+    },
     // attempt_login({ commit }, data) {
     //   axios
     //     .request({
@@ -116,6 +132,9 @@ export default new Vuex.Store({
     },
     cart(state) {
       return state.cart;
+    },
+    bags(state) {
+      return state.bags;
     },
   },
   modules: {},
