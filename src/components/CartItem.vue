@@ -10,7 +10,13 @@
       <div class="cart-item_quantity">
         <p>QTY:</p>
         <span>
-          <button class="quantity_btn" @click="decreaseItem">-</button>
+          <button
+            :disabled="cart_item_data[4] == 1 ? true : false"
+            class="quantity_btn"
+            @click="decreaseItem"
+          >
+            -
+          </button>
           {{ cart_item_data[4] }}
           <button class="quantity_btn" @click="increaseItem">+</button>
         </span>

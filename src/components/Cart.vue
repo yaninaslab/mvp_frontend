@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link :to="{ name: 'Home' }">
-      <div class="link_to_home">BACK HOME</div>
+      <button class="link_to_home">BACK HOME</button>
     </router-link>
     <div v-if="cart_data.length">
       <h1>Shopping Bag</h1>
@@ -18,6 +18,9 @@
       @decreaseItem="decreaseItem(index)"
       @increaseItem="increaseItem(index)"
     ></cart-item>
+    <div class="checkout">
+      <button class="order_btn" v-if="cart_data.length">PLACE ORDER</button>
+    </div>
     <div class="cart_total">
       <p class="total_num">TOTAL:</p>
       <p>C$ {{ cartTotal }}</p>
@@ -73,6 +76,16 @@ export default {
   position: absolute;
   top: 100px;
   right: 20px;
+  padding: 20px;
+  text-align: center;
+  border: solid 1px black;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+}
+.order_btn {
+  margin-top: 30px;
   padding: 20px;
   text-align: center;
   border: solid 1px black;

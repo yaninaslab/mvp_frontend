@@ -1,47 +1,24 @@
 <template>
-  <div class="register_form">
-    <h2>Become a Coach Insider</h2>
-    <p>
-      Join now for early access, birthday gifts,
-      <br />
-      personalized offers and more.
-    </p>
+  <div class="login_form">
+    <h2>Sign in to Coach Insider</h2>
     <input
-      class="register"
-      type="text"
-      ref="fName_input"
-      placeholder="First Name"
-    /><br />
-    <input
-      class="register"
-      type="text"
-      ref="lName_input"
-      placeholder="Last Name"
-    /><br />
-    <input
-      class="register"
+      class="login"
       type="text"
       ref="email_input"
-      placeholder="Email"
+      placeholder="email"
     /><br />
     <input
-      class="register"
+      class="login"
       type="password"
       ref="password_input"
-      placeholder="Password"
-    /><br />
-    <input
-      class="register"
-      type="text"
-      ref="phone_input"
-      placeholder="Phone"
+      placeholder="password"
     /><br />
     <input
       class="buttons"
-      @click="register_user"
+      @click="attempt_login"
       type="submit"
       ref="login_submit"
-      value="CREATE ACCOUNT"
+      value="SIGN IN"
     />
   </div>
 </template>
@@ -50,35 +27,34 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {
-  name: "register-form",
+  name: "login-form",
   methods: {
-    register_user() {
+    attempt_login() {
       axios
         .request({
-          url: "http://127.0.0.1:5000/api/users",
+          url: "http://127.0.0.1:5000/api/login",
           method: "POST",
           data: {
-            firstName: this.$refs.fName_input.value,
-            lastName: this.$refs.lName_input.value,
             email: this.$refs.email_input.value,
             password: this.$refs.password_input.value,
-            phone: this.$refs.phone_input.value,
           },
         })
         .then((response) => {
-          this.users = response.data;
+          this.$store.commit("update_user", response.data);
           cookies.set("login_token", response.data.loginToken);
-          this.$router.push({ path: "/" });
+          cookies.set("user_id", response.data.userId);
+          this.$router.push({ path: "/cart" });
         })
         .catch((error) => {
-          error;
+          error.message;
         });
     },
-  },
-  data() {
-    return {
-      users: [],
-    };
+    // attempt_login() {
+    //   this.$store.dispatch("attempt_login", {
+    //     email: this.$refs.email_input.value,
+    //     password: this.$refs.password_input.value,
+    //   });
+    // },
   },
 };
 </script>
@@ -99,7 +75,7 @@ input {
   height: 50px;
   border: black solid;
 }
-.register {
+.login {
   max-width: 500px;
   border-radius: 5px;
   background: white;
@@ -107,7 +83,7 @@ input {
   outline: none;
   padding: 10px;
 }
-.register:focus {
+.login:focus {
   border: 1px solid gray;
   box-shadow: 0px 0px 3px 1px lightgrey;
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link :to="{ name: 'Cart' }">
-      <div class="link_to_cart">MY BAG({{ cart.length }})</div>
+      <button class="link_to_cart">MY BAG({{ cart.length }})</button>
     </router-link>
 
     <h1>Your Favorites</h1>

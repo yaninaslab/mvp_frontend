@@ -60,49 +60,6 @@
       </v-list>
     </v-navigation-drawer>
   </div>
-  <!-- <div>
-    <div class="mobile_header">
-      <img class="logo_mobile" src="../assets/logo_mvp.png" alt="" />
-      <div @click="showMobileMenu" class="hamburger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
-      <div class="menu_drop">
-        <router-link class="mobile_links" to="/">Home</router-link>
-        <router-link class="mobile_links" to="/deals">Deals</router-link>
-        <router-link class="mobile_links" to="/newarrivals"
-          >New Arrivals</router-link
-        >
-        <router-link class="mobile_links" to="/login">Login</router-link>
-      </div>
-    </div>
-    <div class="nav_menu">
-      <div class="pure-menu pure-menu-horizontal">
-        <router-link class="links pure-menu-heading pure-menu-link" to="/"
-          >Home</router-link
-        >
-        <ul class="pure-menu-list">
-          <li class="pure-menu-item">
-            <router-link class="links pure-menu-link" to="/deals"
-              >Deals</router-link
-            >
-          </li>
-          <li class="pure-menu-item">
-            <router-link class="links pure-menu-link" to="/newarrivals"
-              >New Arrivals</router-link
-            >
-          </li>
-          <li class="pure-menu-item">
-            <router-link class="links pure-menu-link" to="/login"
-              >Login</router-link
-            >
-          </li>
-        </ul>
-      </div>
-      <img class="logo" src="../assets/logo_mvp.png" alt="" />
-    </div>
-  </div> -->
 </template>
 
 <script>

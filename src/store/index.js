@@ -1,5 +1,6 @@
 import axios from "axios";
 import Vue from "vue";
+import cookies from "vue-cookies";
 import Vuex, { Store } from "vuex";
 
 Vue.use(Vuex);
@@ -8,6 +9,7 @@ export default new Vuex.Store({
   state: {
     items: [],
     cart: [],
+    user: {},
   },
   mutations: {
     list_items(state, payload) {
@@ -38,12 +40,21 @@ export default new Vuex.Store({
       state.cart.splice(index, 1);
     },
     increase_item(state, index) {
-      state.cart[index][4]++;
+      const updatedCart = state.cart;
+      updatedCart[index][4]++;
+
+      state.cart = [...updatedCart];
     },
     decrease_item(state, index) {
       if (state.cart[index][4] > 1) {
-        state.cart[index][4]--;
+        const updatedCart = state.cart;
+        updatedCart[index][4]--;
+
+        state.cart = [...updatedCart];
       }
+    },
+    update_user(state, payload) {
+      state.user = payload;
     },
   },
   actions: {
@@ -59,6 +70,28 @@ export default new Vuex.Store({
           error;
         });
     },
+    // attempt_login({ commit }, data) {
+    //   axios
+    //     .request({
+    //       url: "http://127.0.0.1:5000/api/login",
+    //       method: "POST",
+    //       data: {
+    //         email: data.email,
+    //         password: data.password,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       commit("update_user", response.data);
+    //       console.log(response.data);
+    //       cookies.set("login_token", response.data.loginToken);
+    //       cookies.set("user_id", response.data.userId);
+    //       // this.$router.push({ path: "/" });
+    //     })
+    //     .catch((error) => {
+    //       error.message;
+    //     });
+    // },
+
     add_to_cart({ commit }, item) {
       commit("set_cart", item);
     },
@@ -70,6 +103,11 @@ export default new Vuex.Store({
     },
     increase_item({ commit }, index) {
       commit("increase_item", index);
+    },
+    log_out(store) {
+      cookies.remove("login_token");
+      cookies.remove("user_id");
+      store.commit("update_user", {});
     },
   },
   getters: {
