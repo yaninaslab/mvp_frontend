@@ -32,7 +32,7 @@ export default {
     attempt_login() {
       axios
         .request({
-          url: "http://127.0.0.1:5000/api/login",
+          url: `${process.env.VUE_APP_API_URL}/api/login`,
           method: "POST",
           data: {
             email: this.$refs.email_input.value,

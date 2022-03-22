@@ -55,7 +55,7 @@ export default {
     register_user() {
       axios
         .request({
-          url: "http://127.0.0.1:5000/api/users",
+          url: `${process.env.VUE_APP_API_URL}/api/users`,
           method: "POST",
           data: {
             firstName: this.$refs.fName_input.value,

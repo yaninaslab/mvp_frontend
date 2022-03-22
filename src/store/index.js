@@ -65,7 +65,7 @@ export default new Vuex.Store({
     get_items(store) {
       axios
         .request({
-          url: "http://127.0.0.1:5000/api/items",
+          url: `${process.env.VUE_APP_API_URL}/api/items`,
         })
         .then((response) => {
           store.commit("list_items", response.data);
@@ -77,7 +77,7 @@ export default new Vuex.Store({
     get_bags(store) {
       axios
         .request({
-          url: "http://127.0.0.1:5000/api/bags",
+          url: `${process.env.VUE_APP_API_URL}/api/bags`,
         })
         .then((response) => {
           store.commit("list_bags", response.data);

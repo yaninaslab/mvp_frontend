@@ -15,7 +15,7 @@ export default {
     log_out() {
       axios
         .request({
-          url: "http://127.0.0.1:5000/api/login",
+          url: `${process.env.VUE_APP_API_URL}/api/login`,
           method: "DELETE",
           data: {
             loginToken: this.login_token,

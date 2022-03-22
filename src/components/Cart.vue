@@ -23,7 +23,6 @@
         PLACE ORDER
       </button>
     </div>
-    <!-- <thank-you></thank-you> -->
     <div class="cart_total">
       <p class="total_num">TOTAL:</p>
       <p>C$ {{ cartTotal }}</p>
@@ -34,14 +33,12 @@
 <script>
 import axios from "axios";
 import cookies from "vue-cookies";
-// import ThankYou from "@/components/ThankYou.vue";
 import CartItem from "@/components/CartItem.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "cart",
   components: {
     CartItem,
-    // ThankYou,
   },
   computed: {
     cart_data() {
@@ -83,7 +80,7 @@ export default {
     placeOrder() {
       axios
         .request({
-          url: "http://127.0.0.1:5000/api/purchase",
+          url: `${process.env.VUE_APP_API_URL}/api/purchase`,
           method: "POST",
           data: {
             loginToken: this.login_token,
